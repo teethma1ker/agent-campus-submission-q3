@@ -1,0 +1,268 @@
+{
+  "request": {
+    "id": "Q3-07",
+    "scenario": "版本冲突（产品 A 试用期 14天 vs 7天）",
+    "acceptance": [
+      "文档冲突"
+    ],
+    "turns": [
+      {
+        "message": "产品 A 试用期是几天？",
+        "scope": {
+          "docs": [
+            "D06",
+            "D12"
+          ]
+        }
+      }
+    ]
+  },
+  "mode": "real",
+  "turns": [
+    {
+      "turn": "产品 A 试用期是几天？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "关于产品 A 的试用期天数，知识库中两份文档存在冲突，暂无法给出唯一答案，请您确认适用哪份制度：\n\n- 《产品 A 试用期退款说明》（D12，版本日期 2026-10-10，生效日期 2026-10-15）：试用期调整为 7 天，自开通日起计算。\n- 《产品 A 套餐说明》（D06，版本日期 2026-08-20，生效日期 2026-09-01）：试用期为 14 天。\n\n两份文档的适用对象均为“全体客户”，且未说明优先级。若按生效日期较新的 D12，则为 7 天；若按 D06，则为 14 天。请确认以哪份文档为准，我再据此答复。",
+      "citations": [
+        {
+          "doc_id": "D12",
+          "title": "产品 A 试用期退款说明",
+          "version_date": "2026-10-10",
+          "quote": "产品 A 试用期调整为 7 天，自开通日起计算。",
+          "supports": "D12 规定试用期为 7 天"
+        },
+        {
+          "doc_id": "D06",
+          "title": "产品 A 套餐说明",
+          "version_date": "2026-08-20",
+          "quote": "试用期为 14 天，试用期结束前取消不收费。",
+          "supports": "D06 规定试用期为 14 天"
+        }
+      ],
+      "invalid_citations": [],
+      "gap": false,
+      "pending_confirmation": true,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "产品A 试用期 天数",
+            "hits": [
+              "D12",
+              "D06"
+            ]
+          }
+        ],
+        "reads": [
+          {
+            "doc_id": "D12"
+          },
+          {
+            "doc_id": "D06"
+          }
+        ],
+        "conflicts": [
+          {
+            "doc_ids": [
+              "D12",
+              "D06"
+            ],
+            "about": "试用期天数"
+          }
+        ],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "员工询问产品A试用期天数，需先检索可访问文档 D06、D12 中是否有相关规定。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "产品A 试用期 天数"
+          },
+          "observation_summary": "命中 D12(1.2167), D06(1.1167)",
+          "observation": {
+            "query": "产品A 试用期 天数",
+            "count": 2,
+            "hits": [
+              {
+                "doc_id": "D12",
+                "title": "产品 A 试用期退款说明",
+                "score": 1.2167,
+                "version_date": "2026-10-10",
+                "type": "产品FAQ",
+                "department": "产品部",
+                "applies_to": "全体客户",
+                "tags": [
+                  "产品",
+                  "试用",
+                  "退款",
+                  "A",
+                  "订阅"
+                ],
+                "excerpt": "产品 A 试用期调整为 7 天，自开通日起计算。试用期结束前取消不收费；结束后续费的，首月按八折计费。…"
+              },
+              {
+                "doc_id": "D06",
+                "title": "产品 A 套餐说明",
+                "score": 1.1167,
+                "version_date": "2026-08-20",
+                "type": "产品FAQ",
+                "department": "产品部",
+                "applies_to": "全体客户",
+                "tags": [
+                  "产品",
+                  "套餐",
+                  "A",
+                  "订阅",
+                  "试用",
+                  "席位"
+                ],
+                "excerpt": "产品 A 套餐包含：基础版功能、5 个并发席位、100GB 存储空间，支持按月或按年订阅。试用期为 14 天，试用期结束…"
+              }
+            ]
+          },
+          "decision_basis": "员工询问产品A试用期天数，需先检索可访问文档 D06、D12 中是否有相关规定。"
+        },
+        {
+          "step": 2,
+          "thought": "检索到两份相关文档 D12 和 D06，均涉及产品 A 试用期，但摘要显示天数不同（7 天 vs 14 天）。按规则需读取两份原文并调用 compare_docs 核对口径。",
+          "action": "read_snippet",
+          "arguments": {
+            "doc_id": "D12",
+            "about": "试用期天数"
+          },
+          "observation_summary": "D12《产品 A 试用期退款说明》片段：产品 A 试用期调整为 7 天，自开通日起计算。",
+          "observation": {
+            "doc_id": "D12",
+            "title": "产品 A 试用期退款说明",
+            "version_date": "2026-10-10",
+            "effective_date": "2026-10-15",
+            "department": "产品部",
+            "applies_to": "全体客户",
+            "content": "产品 A 试用期调整为 7 天，自开通日起计算。试用期结束前取消不收费；结束后续费的，首月按八折计费。",
+            "snippets": [
+              "产品 A 试用期调整为 7 天，自开通日起计算。",
+              "试用期结束前取消不收费；"
+            ]
+          },
+          "decision_basis": "检索到两份相关文档 D12 和 D06，均涉及产品 A 试用期，但摘要显示天数不同（7 天 vs 14 天）。按规则需读取两份原文并调用 compare_docs 核对口径。"
+        },
+        {
+          "step": 3,
+          "thought": "已读取 D12（7天），检索结果还显示 D06 提到14天，两份文档口径可能冲突，需读取 D06 原文并调用 compare_docs 核对。",
+          "action": "read_snippet",
+          "arguments": {
+            "doc_id": "D06",
+            "about": "试用期天数"
+          },
+          "observation_summary": "D06《产品 A 套餐说明》片段：试用期为 14 天，试用期结束前取消不收费。",
+          "observation": {
+            "doc_id": "D06",
+            "title": "产品 A 套餐说明",
+            "version_date": "2026-08-20",
+            "effective_date": "2026-09-01",
+            "department": "产品部",
+            "applies_to": "全体客户",
+            "content": "产品 A 套餐包含：基础版功能、5 个并发席位、100GB 存储空间，支持按月或按年订阅。试用期为 14 天，试用期结束前取消不收费。",
+            "snippets": [
+              "试用期为 14 天，试用期结束前取消不收费。"
+            ]
+          },
+          "decision_basis": "已读取 D12（7天），检索结果还显示 D06 提到14天，两份文档口径可能冲突，需读取 D06 原文并调用 compare_docs 核对。"
+        },
+        {
+          "step": 4,
+          "thought": "已读取 D12 与 D06 两份相关文档，均涉及产品 A 试用期天数，但数字不同（7 天 vs 14 天），按规则必须调用 compare_docs 核对口径冲突。",
+          "action": "compare_docs",
+          "arguments": {
+            "doc_ids": [
+              "D12",
+              "D06"
+            ],
+            "about": "试用期天数"
+          },
+          "observation_summary": "conflict=True｜D12:['7']；D06:['14']",
+          "observation": {
+            "doc_ids": [
+              "D12",
+              "D06"
+            ],
+            "about": "试用期天数",
+            "views": [
+              {
+                "doc_id": "D12",
+                "title": "产品 A 试用期退款说明",
+                "version_date": "2026-10-10",
+                "department": "产品部",
+                "applies_to": "全体客户",
+                "snippets": [
+                  "产品 A 试用期调整为 7 天，自开通日起计算。",
+                  "试用期结束前取消不收费；"
+                ]
+              },
+              {
+                "doc_id": "D06",
+                "title": "产品 A 套餐说明",
+                "version_date": "2026-08-20",
+                "department": "产品部",
+                "applies_to": "全体客户",
+                "snippets": [
+                  "试用期为 14 天，试用期结束前取消不收费。"
+                ]
+              }
+            ],
+            "numeric_variants": [
+              {
+                "numbers": [
+                  "7"
+                ],
+                "docs": [
+                  "D12"
+                ]
+              },
+              {
+                "numbers": [
+                  "14"
+                ],
+                "docs": [
+                  "D06"
+                ]
+              }
+            ],
+            "conflict": true
+          },
+          "decision_basis": "已读取 D12 与 D06 两份相关文档，均涉及产品 A 试用期天数，但数字不同（7 天 vs 14 天），按规则必须调用 compare_docs 核对口径冲突。"
+        },
+        {
+          "step": 5,
+          "thought": "两份文档对产品A试用期天数给出不同数字（D12为7天，D06为14天），compare_docs已确认冲突，且两份文档均标注适用对象为全体客户，未说明优先级，需列出冲突并请用户确认适用制度。",
+          "action": "finish",
+          "arguments": {
+            "answer": "关于产品 A 的试用期天数，知识库中两份文档存在冲突，暂无法给出唯一答案，请您确认适用哪份制度：\n\n- 《产品 A 试用期退款说明》（D12，版本日期 2026-10-10，生效日期 2026-10-15）：试用期调整为 7 天，自开通日起计算。\n- 《产品 A 套餐说明》（D06，版本日期 2026-08-20，生效日期 2026-09-01）：试用期为 14 天。\n\n两份文档的适用对象均为“全体客户”，且未说明优先级。若按生效日期较新的 D12，则为 7 天；若按 D06，则为 14 天。请确认以哪份文档为准，我再据此答复。",
+            "citations": [
+              {
+                "doc_id": "D12",
+                "quote": "产品 A 试用期调整为 7 天，自开通日起计算。",
+                "supports": "D12 规定试用期为 7 天"
+              },
+              {
+                "doc_id": "D06",
+                "quote": "试用期为 14 天，试用期结束前取消不收费。",
+                "supports": "D06 规定试用期为 14 天"
+              }
+            ]
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "两份文档对产品A试用期天数给出不同数字（D12为7天，D06为14天），compare_docs已确认冲突，且两份文档均标注适用对象为全体客户，未说明优先级，需列出冲突并请用户确认适用制度。"
+        }
+      ],
+      "tool_calls": 4,
+      "steps": 5
+    }
+  ]
+}

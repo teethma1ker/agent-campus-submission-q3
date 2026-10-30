@@ -1,0 +1,132 @@
+{
+  "request": {
+    "id": "Q3-08",
+    "scenario": "执行上限（未完成状态）",
+    "acceptance": [
+      "执行上限"
+    ],
+    "turns": [
+      {
+        "message": "报销期限多久？",
+        "scope": {
+          "docs": [
+            "D01",
+            "D02"
+          ]
+        }
+      }
+    ],
+    "limit_steps": 2
+  },
+  "mode": "real",
+  "turns": [
+    {
+      "turn": "报销期限多久？",
+      "status": "incomplete_limit_reached",
+      "status_note": "达到执行步数/工具调用上限，本轮未完成",
+      "answer": "",
+      "citations": [],
+      "invalid_citations": [],
+      "gap": true,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "报销期限",
+            "hits": [
+              "D01",
+              "D02"
+            ]
+          }
+        ],
+        "reads": [
+          {
+            "doc_id": "D01"
+          }
+        ],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "员工询问报销期限，需先检索知识库中相关文档。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "报销期限"
+          },
+          "observation_summary": "命中 D01(0.9667), D02(0.9667)",
+          "observation": {
+            "query": "报销期限",
+            "count": 2,
+            "hits": [
+              {
+                "doc_id": "D01",
+                "title": "差旅报销管理制度",
+                "score": 0.9667,
+                "version_date": "2026-02-15",
+                "type": "制度",
+                "department": "财务部",
+                "applies_to": "全体正式员工",
+                "tags": [
+                  "报销",
+                  "差旅",
+                  "期限",
+                  "发票"
+                ],
+                "excerpt": "第一条 员工出差产生的交通、住宿费用，应在出差结束后 30 天内提交报销申请，逾期不予受理。第二条 报销需附发票原件与出…"
+              },
+              {
+                "doc_id": "D02",
+                "title": "销售部门差旅报销细则",
+                "score": 0.9667,
+                "version_date": "2026-06-01",
+                "type": "细则",
+                "department": "销售部",
+                "applies_to": "销售部员工",
+                "tags": [
+                  "报销",
+                  "差旅",
+                  "期限",
+                  "销售部"
+                ],
+                "excerpt": "一、本细则适用于销售部全体员工的差旅报销。二、销售部员工出差结束后 15 天内提交报销，超出期限需销售总监签字特批。三、…"
+              }
+            ]
+          },
+          "decision_basis": "员工询问报销期限，需先检索知识库中相关文档。"
+        },
+        {
+          "step": 2,
+          "thought": "检索到两份相关文档（D01 差旅报销管理制度、D02 销售部门差旅报销细则），期限口径可能不同，需读取原文并对比核对。",
+          "action": "read_snippet",
+          "arguments": {
+            "doc_id": "D01",
+            "about": "报销期限"
+          },
+          "observation_summary": "D01《差旅报销管理制度》片段：第一条 员工出差产生的交通、住宿费用，应在出差结束后 30 天内提交报销申请，逾期不予受理。",
+          "observation": {
+            "doc_id": "D01",
+            "title": "差旅报销管理制度",
+            "version_date": "2026-02-15",
+            "effective_date": "2026-03-01",
+            "department": "财务部",
+            "applies_to": "全体正式员工",
+            "content": "第一条 员工出差产生的交通、住宿费用，应在出差结束后 30 天内提交报销申请，逾期不予受理。第二条 报销需附发票原件与出差审批单。第三条 单笔金额超过 5000 元的，需部门负责人复核。",
+            "snippets": [
+              "第一条 员工出差产生的交通、住宿费用，应在出差结束后 30 天内提交报销申请，逾期不予受理。",
+              "第二条 报销需附发票原件与出差审批单。"
+            ]
+          },
+          "decision_basis": "检索到两份相关文档（D01 差旅报销管理制度、D02 销售部门差旅报销细则），期限口径可能不同，需读取原文并对比核对。"
+        }
+      ],
+      "tool_calls": 2,
+      "steps": 2
+    }
+  ]
+}

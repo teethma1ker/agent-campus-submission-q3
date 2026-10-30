@@ -1,0 +1,100 @@
+{
+  "request": {
+    "id": "Q3-03",
+    "scenario": "资料外问题",
+    "acceptance": [
+      "资料外问题"
+    ],
+    "turns": [
+      {
+        "message": "公司年会什么时候办？",
+        "scope": {
+          "docs": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D05"
+          ]
+        }
+      }
+    ]
+  },
+  "mode": "real",
+  "turns": [
+    {
+      "turn": "公司年会什么时候办？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "抱歉，知识库中没有关于公司年会举办时间的相关资料（检索“公司年会 举办时间”和“年会”均无结果），因此无法确认年会何时举办。建议咨询行政或人力资源部门获取准确信息。",
+      "citations": [],
+      "invalid_citations": [],
+      "gap": true,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "公司年会 举办时间",
+            "hits": []
+          },
+          {
+            "query": "年会",
+            "hits": []
+          }
+        ],
+        "reads": [],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "员工询问公司年会举办时间，需先检索知识库是否有相关制度或FAQ。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "公司年会 举办时间"
+          },
+          "observation_summary": "命中 ",
+          "observation": {
+            "query": "公司年会 举办时间",
+            "count": 0,
+            "hits": []
+          },
+          "decision_basis": "员工询问公司年会举办时间，需先检索知识库是否有相关制度或FAQ。"
+        },
+        {
+          "step": 2,
+          "thought": "检索“公司年会 举办时间”返回 0 条结果，知识库中可能没有年会相关制度。可换关键词再检索一次，确认是否存在相关资料。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年会"
+          },
+          "observation_summary": "命中 ",
+          "observation": {
+            "query": "年会",
+            "count": 0,
+            "hits": []
+          },
+          "decision_basis": "检索“公司年会 举办时间”返回 0 条结果，知识库中可能没有年会相关制度。可换关键词再检索一次，确认是否存在相关资料。"
+        },
+        {
+          "step": 3,
+          "thought": "两次检索均未命中任何文档，知识库中没有关于公司年会举办时间的内容，属于资料缺口，不应凭空作答。",
+          "action": "finish",
+          "arguments": {
+            "answer": "抱歉，知识库中没有关于公司年会举办时间的相关资料（检索“公司年会 举办时间”和“年会”均无结果），因此无法确认年会何时举办。建议咨询行政或人力资源部门获取准确信息。",
+            "citations": []
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "两次检索均未命中任何文档，知识库中没有关于公司年会举办时间的内容，属于资料缺口，不应凭空作答。"
+        }
+      ],
+      "tool_calls": 2,
+      "steps": 3
+    }
+  ]
+}

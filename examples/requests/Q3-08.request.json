@@ -1,0 +1,19 @@
+{
+  "id": "Q3-08",
+  "scenario": "执行上限（未完成状态）",
+  "acceptance": [
+    "执行上限"
+  ],
+  "turns": [
+    {
+      "message": "报销期限多久？",
+      "scope": {
+        "docs": [
+          "D01",
+          "D02"
+        ]
+      }
+    }
+  ],
+  "limit_steps": 2
+}

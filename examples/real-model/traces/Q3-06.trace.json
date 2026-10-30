@@ -1,0 +1,89 @@
+{
+  "request": {
+    "id": "Q3-06",
+    "scenario": "工具失败（检索服务超时）",
+    "acceptance": [
+      "工具失败"
+    ],
+    "turns": [
+      {
+        "message": "年假怎么结转？",
+        "scope": {
+          "docs": [
+            "D03"
+          ]
+        }
+      }
+    ],
+    "faults": {
+      "search_docs": {
+        "error": "检索服务超时（search-service timeout）",
+        "remaining": 2
+      }
+    }
+  },
+  "mode": "real",
+  "turns": [
+    {
+      "turn": "年假怎么结转？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "抱歉，知识库检索服务连续两次超时（search-service timeout），我暂时无法确认年假结转的相关规定。请稍后重试，或联系HR/知识库管理员核实。",
+      "citations": [],
+      "invalid_citations": [],
+      "gap": true,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [],
+        "reads": [],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "员工询问年假结转规则，可访问文档仅 D03，先检索相关制度。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假结转"
+          },
+          "observation_summary": "error: 检索服务超时（search-service timeout）",
+          "observation": {
+            "error": "检索服务超时（search-service timeout）"
+          },
+          "decision_basis": "员工询问年假结转规则，可访问文档仅 D03，先检索相关制度。"
+        },
+        {
+          "step": 2,
+          "thought": "检索服务超时，按规则可重试一次同一检索。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假结转"
+          },
+          "observation_summary": "error: 检索服务超时（search-service timeout）",
+          "observation": {
+            "error": "检索服务超时（search-service timeout）"
+          },
+          "decision_basis": "检索服务超时，按规则可重试一次同一检索。"
+        },
+        {
+          "step": 3,
+          "thought": "检索服务连续两次超时，已按规则重试一次仍失败，无法确认年假结转的制度内容，不应猜测作答。",
+          "action": "finish",
+          "arguments": {
+            "answer": "抱歉，知识库检索服务连续两次超时（search-service timeout），我暂时无法确认年假结转的相关规定。请稍后重试，或联系HR/知识库管理员核实。",
+            "citations": []
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "检索服务连续两次超时，已按规则重试一次仍失败，无法确认年假结转的制度内容，不应猜测作答。"
+        }
+      ],
+      "tool_calls": 2,
+      "steps": 3
+    }
+  ]
+}

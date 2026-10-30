@@ -1,0 +1,89 @@
+{
+  "request": {
+    "id": "Q3-06",
+    "scenario": "工具失败（检索服务超时）",
+    "acceptance": [
+      "工具失败"
+    ],
+    "turns": [
+      {
+        "message": "年假怎么结转？",
+        "scope": {
+          "docs": [
+            "D03"
+          ]
+        }
+      }
+    ],
+    "faults": {
+      "search_docs": {
+        "error": "检索服务超时（search-service timeout）",
+        "remaining": 2
+      }
+    }
+  },
+  "mode": "mock",
+  "turns": [
+    {
+      "turn": "年假怎么结转？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "检索服务暂时不可用（检索服务超时（search-service timeout）），我无法确认答案；请稍后重试或直接提供相关制度文档。",
+      "citations": [],
+      "invalid_citations": [],
+      "gap": true,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [],
+        "reads": [],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "先检索知识库。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假怎么结转？"
+          },
+          "observation_summary": "error: 检索服务超时（search-service timeout）",
+          "observation": {
+            "error": "检索服务超时（search-service timeout）"
+          },
+          "decision_basis": "先检索知识库。"
+        },
+        {
+          "step": 2,
+          "thought": "检索失败（检索服务超时（search-service timeout）），重试一次。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假怎么结转？"
+          },
+          "observation_summary": "error: 检索服务超时（search-service timeout）",
+          "observation": {
+            "error": "检索服务超时（search-service timeout）"
+          },
+          "decision_basis": "检索失败（检索服务超时（search-service timeout）），重试一次。"
+        },
+        {
+          "step": 3,
+          "thought": "检索服务连续失败，停止并说明无法确认。",
+          "action": "finish",
+          "arguments": {
+            "answer": "检索服务暂时不可用（检索服务超时（search-service timeout）），我无法确认答案；请稍后重试或直接提供相关制度文档。",
+            "citations": []
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "检索服务连续失败，停止并说明无法确认。"
+        }
+      ],
+      "tool_calls": 2,
+      "steps": 3
+    }
+  ]
+}

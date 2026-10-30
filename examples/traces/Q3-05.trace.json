@@ -1,0 +1,323 @@
+{
+  "request": {
+    "id": "Q3-05",
+    "scenario": "上下文追问（多轮）",
+    "acceptance": [
+      "上下文追问"
+    ],
+    "turns": [
+      {
+        "message": "年假有多少天？",
+        "scope": {
+          "docs": [
+            "D03"
+          ]
+        }
+      },
+      {
+        "message": "那需要提前几天申请？",
+        "scope": {
+          "docs": [
+            "D03"
+          ]
+        }
+      }
+    ]
+  },
+  "mode": "mock",
+  "turns": [
+    {
+      "turn": "年假有多少天？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "依据 D03《年假管理办法》：员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+      "citations": [
+        {
+          "doc_id": "D03",
+          "title": "年假管理办法",
+          "version_date": "2025-11-20",
+          "quote": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+          "supports": "直接回答问题的条款"
+        }
+      ],
+      "invalid_citations": [],
+      "gap": false,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "年假有多少天？",
+            "hits": [
+              "D03"
+            ]
+          },
+          {
+            "query": "那需要提前几天申请？",
+            "hits": [
+              "D03"
+            ]
+          },
+          {
+            "query": "年假有多少天？ 那需要提前几天申请？",
+            "hits": [
+              "D03"
+            ]
+          }
+        ],
+        "reads": [
+          {
+            "doc_id": "D03"
+          },
+          {
+            "doc_id": "D03"
+          }
+        ],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "先检索知识库。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假有多少天？"
+          },
+          "observation_summary": "命中 D03(0.4)",
+          "observation": {
+            "query": "年假有多少天？",
+            "count": 1,
+            "hits": [
+              {
+                "doc_id": "D03",
+                "title": "年假管理办法",
+                "score": 0.4,
+                "version_date": "2025-11-20",
+                "type": "制度",
+                "department": "人力资源部",
+                "applies_to": "全体正式员工",
+                "tags": [
+                  "年假",
+                  "休假",
+                  "假期",
+                  "结转"
+                ],
+                "excerpt": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。年假需提前 3 个工作日申请，原则上不跨年度…"
+              }
+            ]
+          },
+          "decision_basis": "先检索知识库。"
+        },
+        {
+          "step": 2,
+          "thought": "检索到 D03，读取原文核对条款。",
+          "action": "read_snippet",
+          "arguments": {
+            "doc_id": "D03",
+            "about": "年假有多少天？"
+          },
+          "observation_summary": "D03《年假管理办法》片段：员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+          "observation": {
+            "doc_id": "D03",
+            "title": "年假管理办法",
+            "version_date": "2025-11-20",
+            "effective_date": "2026-01-01",
+            "department": "人力资源部",
+            "applies_to": "全体正式员工",
+            "content": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+            "snippets": [
+              "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+              "年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。"
+            ]
+          },
+          "decision_basis": "检索到 D03，读取原文核对条款。"
+        },
+        {
+          "step": 3,
+          "thought": "原文条款直接支持回答。",
+          "action": "finish",
+          "arguments": {
+            "answer": "依据 D03《年假管理办法》：员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+            "citations": [
+              {
+                "doc_id": "D03",
+                "quote": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。",
+                "supports": "直接回答问题的条款"
+              }
+            ]
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "原文条款直接支持回答。"
+        }
+      ],
+      "tool_calls": 2,
+      "steps": 3
+    },
+    {
+      "turn": "那需要提前几天申请？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "依据 D03《年假管理办法》：年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+      "citations": [
+        {
+          "doc_id": "D03",
+          "title": "年假管理办法",
+          "version_date": "2025-11-20",
+          "quote": "年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+          "supports": "直接回答问题的条款"
+        }
+      ],
+      "invalid_citations": [],
+      "gap": false,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "年假有多少天？",
+            "hits": [
+              "D03"
+            ]
+          },
+          {
+            "query": "那需要提前几天申请？",
+            "hits": [
+              "D03"
+            ]
+          },
+          {
+            "query": "年假有多少天？ 那需要提前几天申请？",
+            "hits": [
+              "D03"
+            ]
+          }
+        ],
+        "reads": [
+          {
+            "doc_id": "D03"
+          },
+          {
+            "doc_id": "D03"
+          }
+        ],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "先检索知识库。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "那需要提前几天申请？"
+          },
+          "observation_summary": "命中 D03(0.25)",
+          "observation": {
+            "query": "那需要提前几天申请？",
+            "count": 1,
+            "hits": [
+              {
+                "doc_id": "D03",
+                "title": "年假管理办法",
+                "score": 0.25,
+                "version_date": "2025-11-20",
+                "type": "制度",
+                "department": "人力资源部",
+                "applies_to": "全体正式员工",
+                "tags": [
+                  "年假",
+                  "休假",
+                  "假期",
+                  "结转"
+                ],
+                "excerpt": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。年假需提前 3 个工作日申请，原则上不跨年度…"
+              }
+            ]
+          },
+          "decision_basis": "先检索知识库。"
+        },
+        {
+          "step": 2,
+          "thought": "追问句缺少主题词，结合上一轮主题「年假有多少天？」再检索一次。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "年假有多少天？ 那需要提前几天申请？"
+          },
+          "observation_summary": "命中 D03(0.4)",
+          "observation": {
+            "query": "年假有多少天？ 那需要提前几天申请？",
+            "count": 1,
+            "hits": [
+              {
+                "doc_id": "D03",
+                "title": "年假管理办法",
+                "score": 0.4,
+                "version_date": "2025-11-20",
+                "type": "制度",
+                "department": "人力资源部",
+                "applies_to": "全体正式员工",
+                "tags": [
+                  "年假",
+                  "休假",
+                  "假期",
+                  "结转"
+                ],
+                "excerpt": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。年假需提前 3 个工作日申请，原则上不跨年度…"
+              }
+            ]
+          },
+          "decision_basis": "追问句缺少主题词，结合上一轮主题「年假有多少天？」再检索一次。"
+        },
+        {
+          "step": 3,
+          "thought": "检索到 D03，读取原文核对条款。",
+          "action": "read_snippet",
+          "arguments": {
+            "doc_id": "D03",
+            "about": "那需要提前几天申请？"
+          },
+          "observation_summary": "D03《年假管理办法》片段：年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+          "observation": {
+            "doc_id": "D03",
+            "title": "年假管理办法",
+            "version_date": "2025-11-20",
+            "effective_date": "2026-01-01",
+            "department": "人力资源部",
+            "applies_to": "全体正式员工",
+            "content": "员工入职满一年享有 5 天年假，满三年享有 10 天，满五年享有 15 天。年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+            "snippets": [
+              "年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。"
+            ]
+          },
+          "decision_basis": "检索到 D03，读取原文核对条款。"
+        },
+        {
+          "step": 4,
+          "thought": "原文条款直接支持回答。",
+          "action": "finish",
+          "arguments": {
+            "answer": "依据 D03《年假管理办法》：年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+            "citations": [
+              {
+                "doc_id": "D03",
+                "quote": "年假需提前 3 个工作日申请，原则上不跨年度清零，未休年假可结转至次年 3 月底。",
+                "supports": "直接回答问题的条款"
+              }
+            ]
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "原文条款直接支持回答。"
+        }
+      ],
+      "tool_calls": 3,
+      "steps": 4
+    }
+  ]
+}

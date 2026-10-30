@@ -1,0 +1,23 @@
+[
+  {"id": "Q3-01", "scenario": "明确答案（参考实例：单独检索到 D01 无冲突）", "acceptance": ["明确答案"],
+   "turns": [{"message": "报销期限多久？", "scope": {"docs": ["D01"]}}]},
+  {"id": "Q3-02", "scenario": "文档冲突（参考实例：D01 30天 vs D02 15天）", "acceptance": ["文档冲突"],
+   "turns": [{"message": "报销期限多久？", "scope": {"docs": ["D01", "D02"]}}]},
+  {"id": "Q3-03", "scenario": "资料外问题", "acceptance": ["资料外问题"],
+   "turns": [{"message": "公司年会什么时候办？", "scope": {"docs": ["D01", "D02", "D03", "D04", "D05"]}}]},
+  {"id": "Q3-04", "scenario": "改写后的相似问题", "acceptance": ["改写后的相似问题"],
+   "turns": [{"message": "出差完了多久之内要报销？", "scope": {"docs": ["D01"]}}]},
+  {"id": "Q3-05", "scenario": "上下文追问（多轮）", "acceptance": ["上下文追问"],
+   "turns": [
+     {"message": "年假有多少天？", "scope": {"docs": ["D03"]}},
+     {"message": "那需要提前几天申请？", "scope": {"docs": ["D03"]}}
+   ]},
+  {"id": "Q3-06", "scenario": "工具失败（检索服务超时）", "acceptance": ["工具失败"],
+   "turns": [{"message": "年假怎么结转？", "scope": {"docs": ["D03"]}}],
+   "faults": {"search_docs": {"error": "检索服务超时（search-service timeout）", "remaining": 2}}},
+  {"id": "Q3-07", "scenario": "版本冲突（产品 A 试用期 14天 vs 7天）", "acceptance": ["文档冲突"],
+   "turns": [{"message": "产品 A 试用期是几天？", "scope": {"docs": ["D06", "D12"]}}]},
+  {"id": "Q3-08", "scenario": "执行上限（未完成状态）", "acceptance": ["执行上限"],
+   "turns": [{"message": "报销期限多久？", "scope": {"docs": ["D01", "D02"]}}],
+   "limit_steps": 2}
+]

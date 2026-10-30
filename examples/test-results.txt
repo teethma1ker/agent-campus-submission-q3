@@ -1,0 +1,31 @@
+test_answer_without_any_citation_flagged (test_scenarios.CitationGuardTest) ... ok
+test_duplicate_citations_deduped (test_scenarios.CitationGuardTest) ... ok
+test_fake_quote_removed_and_flagged (test_scenarios.CitationGuardTest) ... ok
+test_unsupported_number_flagged (test_scenarios.CitationGuardTest) ... ok
+test_cite_d01_when_no_conflict (test_scenarios.ClearAnswerTest) ... ok
+test_after_user_selects_department_answer_with_d02 (test_scenarios.ConflictTest)
+冲突后用户确认适用制度，第二轮按指定制度回答并引用。 ... ok
+test_conflict_requests_confirmation_not_one_answer (test_scenarios.ConflictTest) ... ok
+test_version_conflict_trial_days (test_scenarios.ConflictTest) ... ok
+test_second_turn_uses_history (test_scenarios.ContextFollowupTest) ... ok
+test_step_limit (test_scenarios.LimitTest) ... ok
+test_no_material_gap (test_scenarios.OutOfScopeTest) ... ok
+test_paraphrase_answered_from_d01 (test_scenarios.RewrittenQuestionTest) ... ok
+test_swap_document_content_changes_answer (test_scenarios.RewrittenQuestionTest)
+审核要点：替换文档内容，答案与动作应随之改变。 ... ok
+test_retry_then_report_no_answer (test_scenarios.ToolFailureTest) ... ok
+test_conflict_detected (test_tools.CompareTest) ... ok
+test_no_conflict_same_numbers (test_tools.CompareTest) ... ok
+test_rules (test_tools.SchemaTest) ... ok
+test_direct_query_hits_d01 (test_tools.SearchTest) ... ok
+test_irrelevant_query_no_hits (test_tools.SearchTest) ... ok
+test_out_of_scope (test_tools.SearchTest) ... ok
+test_rewritten_query_still_hits (test_tools.SearchTest) ... ok
+test_search_fault_then_recover (test_tools.SearchTest) ... ok
+test_read_out_of_scope (test_tools.SnippetTest) ... ok
+test_read_returns_verbatim_snippets (test_tools.SnippetTest) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.104s
+
+OK

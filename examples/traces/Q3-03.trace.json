@@ -1,0 +1,81 @@
+{
+  "request": {
+    "id": "Q3-03",
+    "scenario": "资料外问题",
+    "acceptance": [
+      "资料外问题"
+    ],
+    "turns": [
+      {
+        "message": "公司年会什么时候办？",
+        "scope": {
+          "docs": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D05"
+          ]
+        }
+      }
+    ]
+  },
+  "mode": "mock",
+  "turns": [
+    {
+      "turn": "公司年会什么时候办？",
+      "status": "completed",
+      "status_note": "本轮已给出结果",
+      "answer": "知识库中没有找到与这个问题相关的资料，无法回答；建议咨询行政/HR 或提供对应文档。",
+      "citations": [],
+      "invalid_citations": [],
+      "gap": true,
+      "pending_confirmation": false,
+      "quality": {
+        "passed": true,
+        "issues": []
+      },
+      "evidence": {
+        "retrievals": [
+          {
+            "query": "公司年会什么时候办？",
+            "hits": []
+          }
+        ],
+        "reads": [],
+        "conflicts": [],
+        "resolutions": []
+      },
+      "trace": [
+        {
+          "step": 1,
+          "thought": "先检索知识库。",
+          "action": "search_docs",
+          "arguments": {
+            "query": "公司年会什么时候办？"
+          },
+          "observation_summary": "命中 ",
+          "observation": {
+            "query": "公司年会什么时候办？",
+            "count": 0,
+            "hits": []
+          },
+          "decision_basis": "先检索知识库。"
+        },
+        {
+          "step": 2,
+          "thought": "知识库无相关资料。",
+          "action": "finish",
+          "arguments": {
+            "answer": "知识库中没有找到与这个问题相关的资料，无法回答；建议咨询行政/HR 或提供对应文档。",
+            "citations": []
+          },
+          "observation_summary": "给出最终回答",
+          "decision_basis": "知识库无相关资料。"
+        }
+      ],
+      "tool_calls": 1,
+      "steps": 2
+    }
+  ]
+}

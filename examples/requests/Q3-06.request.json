@@ -1,0 +1,23 @@
+{
+  "id": "Q3-06",
+  "scenario": "工具失败（检索服务超时）",
+  "acceptance": [
+    "工具失败"
+  ],
+  "turns": [
+    {
+      "message": "年假怎么结转？",
+      "scope": {
+        "docs": [
+          "D03"
+        ]
+      }
+    }
+  ],
+  "faults": {
+    "search_docs": {
+      "error": "检索服务超时（search-service timeout）",
+      "remaining": 2
+    }
+  }
+}
